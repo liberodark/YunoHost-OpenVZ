@@ -243,6 +243,7 @@ function check_assertions()
           echo "bind9 is removed"
       fi
     else
+        echo no
         die "Need to remove bind9"
 	fi
 
@@ -258,6 +259,7 @@ function check_assertions()
           echo "apache is removed"
       fi
     else
+        echo no
         die "Need to remove apache"
 	fi
 
