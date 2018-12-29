@@ -97,7 +97,6 @@ function main()
 
     check_assertions
 
-    step fix_redis-server              || die "Error start service"
     step fix_locales                   # do not die for a failure here, it's minor
     step upgrade_system                || die "Unable to update the system"
     step install_script_dependencies   || die "Unable to install dependencies to install script"
@@ -107,6 +106,7 @@ function main()
     step apt_update                    || die "Error caught during 'apt-get update'"
     step register_debconf              || die "Unable to insert new values into debconf database"
     step workaround_avahi_installation || die "Unable to install workaround for avahi installation"
+    step fix_redis-server              || die "Error start service"
     step install_yunohost_packages     || die "Installation of Yunohost packages failed"
     step restart_services              || die "Error caught during services restart"
 
@@ -243,7 +243,7 @@ function check_assertions()
           echo "bind9 is removed"
       fi
     else
-        echo No
+        die "Need to remove bind9"
 	fi
 
     [[ -z "$(dpkg --get-selections | grep -v deinstall | grep 'apache2\s')" ]] || [[ "$FORCE" == "1" ]] \
@@ -258,7 +258,7 @@ function check_assertions()
           echo "apache is removed"
       fi
     else
-        echo No
+        die "Need to remove apache"
 	fi
 
 }
