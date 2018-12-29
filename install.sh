@@ -233,35 +233,11 @@ function check_assertions()
     # Check possible conflict with apache, bind9.
     [[ -z "$(dpkg --get-selections | grep -v deinstall | grep 'bind9\s')" ]] || [[ "$FORCE" == "1" ]] \
         || echo "Bind9 is installed and might conflict with dnsmasq. Uninstall it first, or if you know what you are doing, run this script with -f."
-    echo -n "Do you want to remove bind9 (y/n)? "
-    read answer
-  
-    if [ "$answer" != "${answer#[Yy]}" ] ;then
-        echo Yes
-          apt-get remove -y bind9
-      else
-          echo "bind9 is removed"
-      fi
-    else
-        echo no
-        die "Need to remove bind9"
-	fi
+        apt-get remove -y bind9
 
     [[ -z "$(dpkg --get-selections | grep -v deinstall | grep 'apache2\s')" ]] || [[ "$FORCE" == "1" ]] \
         || echo "Apache is installed and might conflict with nginx. Uninstall it first, or if you know what you are doing, run this script with -f."
-    echo -n "Do you want to remove apache (y/n)? "
-    read answer
-  
-    if [ "$answer" != "${answer#[Yy]}" ] ;then
-        echo Yes
-          apt-get remove -y apache*
-      else
-          echo "apache is removed"
-      fi
-    else
-        echo no
-        die "Need to remove apache"
-	fi
+        apt-get remove -y apache*
 
 }
 
