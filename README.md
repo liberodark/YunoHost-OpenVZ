@@ -1,5 +1,5 @@
 # YunoHost-OpenVZ
-YunoHost for OpenVZ
+YunoHost for OpenVZ only work on Debian 9
 
 # How to use :
 
