@@ -11,12 +11,15 @@ wget -Nnv https://raw.githubusercontent.com/liberodark/YunoHost-OpenVZ/master/in
 # For Debian 8 :
 
 ```bash
-apt update && apt dist-upgrade -y```
+apt update && apt dist-upgrade -y
+```
 
 ```bash
-sed -i 's|jessie|stretch|' /etc/apt/sources.list```
+sed -i 's|jessie|stretch|' /etc/apt/sources.list
+```
 
 ```bash
-apt update && apt dist-upgrade -y```
+apt update && apt dist-upgrade -y
+```
 
 Next reboot and run script
