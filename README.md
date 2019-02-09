@@ -24,13 +24,13 @@ wget https://github.com/liberodark/YunoHost-OpenVZ/releases/download/1.0/dedigo-
 ```bash
 sha512sum -c dedigo-openvz.tar.gz.sha512sum
 ```
-- 4. Install
+- 4 - Install
 
 ```bash
 tar -xvf dedigo-openvz.tar.gz
 ```
 
-- 5. Finish now reboot your server on your panel (not reboot in terminal) !
+- 5 - Finish now reboot your server on your panel (not reboot in terminal) !
 
 ### For Debian 8 :
 
