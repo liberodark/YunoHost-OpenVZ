@@ -32,8 +32,8 @@ mv dedigo-openvz.tar.gz / && cd /
 tar -xvf dedigo-openvz.tar.gz
 ```
 
-- 5 
-- Finish now reboot your server on your panel (not reboot in terminal)
+- 5 Finish
+- Now reboot your server on your panel (not reboot in terminal)
 - The login and password is "root" and "admin" / "linux580@"
 
 - 6 - After reboot 
