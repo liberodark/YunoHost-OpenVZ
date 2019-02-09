@@ -1,7 +1,7 @@
 # YunoHost-OpenVZ
 YunoHost for OpenVZ only work on Debian 9
 
-## How to use :
+## How to use (manual install) :
 
 Copy and Past in your terminal :
 
@@ -9,7 +9,7 @@ Copy and Past in your terminal :
 wget -Nnv https://raw.githubusercontent.com/liberodark/YunoHost-OpenVZ/master/install.sh && chmod +x install.sh; ./install.sh
 ```
 
-## Install Image :
+## Install Image (auto install) :
 
 -  1 - Download Image
 ```bash
@@ -34,7 +34,7 @@ tar -xvf dedigo-openvz.tar.gz
 
 - 5 - Finish now reboot your server on your panel (not reboot in terminal | the login - password is "root" / "linux580@") !
 
-## For Debian 8 :
+## For Debian 8 (manual install) :
 
 ```bash
 apt update && apt dist-upgrade -y
