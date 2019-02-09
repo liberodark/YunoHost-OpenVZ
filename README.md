@@ -40,6 +40,7 @@ tar -xvf dedigo-openvz.tar.gz
 
 ```bash
 passwd
+echo "nameserver 1.1.1.1" | tee /etc/resolv.dnsmasq.conf
 ```
 
 ## For Debian 8 (manual install) :
