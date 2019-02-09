@@ -9,18 +9,18 @@ Copy and Past in your terminal :
 wget -Nnv https://raw.githubusercontent.com/liberodark/YunoHost-OpenVZ/master/install.sh && chmod +x install.sh; ./install.sh
 ```
 
-### Install Image :
+## Install Image :
 
--  1. Download Image
+-  1 - Download Image
 ```bash
 wget -Nnv https://github.com/liberodark/YunoHost-OpenVZ/releases/download/1.0/dedigo-openvz.tar.gz
 ```
-- 2. Download SHA
+- 2 - Download SHA
 ```bash
 wget https://github.com/liberodark/YunoHost-OpenVZ/releases/download/1.0/dedigo-openvz.tar.gz.sha512sum
 ```
 
-- 3. Check Integrity
+- 3 - Check Integrity
 ```bash
 sha512sum -c dedigo-openvz.tar.gz.sha512sum
 ```
@@ -32,7 +32,7 @@ tar -xvf dedigo-openvz.tar.gz
 
 - 5 - Finish now reboot your server on your panel (not reboot in terminal) !
 
-### For Debian 8 :
+## For Debian 8 :
 
 ```bash
 apt update && apt dist-upgrade -y
