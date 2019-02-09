@@ -13,7 +13,7 @@ wget -Nnv https://raw.githubusercontent.com/liberodark/YunoHost-OpenVZ/master/in
 
 -  1 - Download Image
 ```bash
-wget -Nnv https://github.com/liberodark/YunoHost-OpenVZ/releases/download/1.0/dedigo-openvz.tar.gz
+wget https://github.com/liberodark/YunoHost-OpenVZ/releases/download/1.0/dedigo-openvz.tar.gz
 ```
 - 2 - Download SHA
 ```bash
