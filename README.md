@@ -11,20 +11,20 @@ wget -Nnv https://raw.githubusercontent.com/liberodark/YunoHost-OpenVZ/master/in
 
 ## Install Image (auto install) :
 
--  1 - Download Image
+#####  1 - Download Image
 ```bash
 wget https://github.com/liberodark/YunoHost-OpenVZ/releases/download/1.0/dedigo-openvz.tar.gz
 ```
-- 2 - Download SHA
+##### 2 - Download SHA
 ```bash
 wget https://github.com/liberodark/YunoHost-OpenVZ/releases/download/1.0/dedigo-openvz.tar.gz.sha512sum
 ```
 
-- 3 - Check Integrity
+##### 3 - Check Integrity
 ```bash
 sha512sum -c dedigo-openvz.tar.gz.sha512sum
 ```
-- 4 - Install
+##### 4 - Install
 
 ```bash
 apt remove apache2* -y
@@ -32,11 +32,11 @@ mv dedigo-openvz.tar.gz / && cd /
 tar -xvf dedigo-openvz.tar.gz
 ```
 
-- 5 Finish
+##### 5 Finish
 - Now reboot your server on your panel (not reboot in terminal)
 - The login and password is "root" and "admin" / "linux580@"
 
-- 6 - After reboot 
+##### 6 - After reboot 
 
 ```bash
 passwd
