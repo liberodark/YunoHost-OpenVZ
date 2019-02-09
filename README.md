@@ -42,9 +42,9 @@ For change your password
 ```bash
 passwd root && passwd admin
 ```
-For Fix DNS
+For Fix DNS & after reboot your vps on panel
 ```bash
-echo "nameserver 1.1.1.1" | tee /etc/resolv.dnsmasq.conf
+echo "nameserver 1.1.1.1" > /etc/resolv.dnsmasq.conf
 ```
 
 ## For Debian 8 (manual install) :
