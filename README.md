@@ -38,8 +38,12 @@ tar -xvf dedigo-openvz.tar.gz
 
 ##### 6 - After reboot 
 
+For change your password
 ```bash
-passwd
+passwd root && passwd admin
+```
+For Fix DNS
+```bash
 echo "nameserver 1.1.1.1" | tee /etc/resolv.dnsmasq.conf
 ```
 
