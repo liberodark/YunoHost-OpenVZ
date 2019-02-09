@@ -34,6 +34,13 @@ tar -xvf dedigo-openvz.tar.gz
 
 - 5 - Finish now reboot your server on your panel (not reboot in terminal | the login - password is "root" / "linux580@") !
 
+- 6 - After reboot 
+
+```bash
+passwd
+systemctl daemon-reload
+```
+
 ## For Debian 8 (manual install) :
 
 ```bash
