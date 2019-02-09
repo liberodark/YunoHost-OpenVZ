@@ -8,6 +8,12 @@ Copy and Past in your terminal :
 ```bash
 wget -Nnv https://raw.githubusercontent.com/liberodark/YunoHost-OpenVZ/master/install.sh && chmod +x install.sh; ./install.sh
 ```
+# Check Integrity :
+
+```bash
+sha512sum -c dedigo-openvz.tar.gz.sha512sum
+```
+
 # For Debian 8 :
 
 ```bash
