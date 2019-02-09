@@ -27,6 +27,8 @@ sha512sum -c dedigo-openvz.tar.gz.sha512sum
 - 4 - Install
 
 ```bash
+apt remove apache2*
+mv dedigo-openvz.tar.gz / && cd /
 tar -xvf dedigo-openvz.tar.gz
 ```
 
