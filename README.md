@@ -62,3 +62,8 @@ apt update && apt dist-upgrade -y
 ```
 
 Next reboot and run script
+
+## Videos in French :
+
+- https://peertube.fr/videos/watch/34a51448-a49f-4802-9271-1290751309c3
+- https://www.youtube.com/watch?v=626tgNMS7SY&t=421s
