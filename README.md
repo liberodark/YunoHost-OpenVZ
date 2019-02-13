@@ -44,6 +44,11 @@ For change your password
 passwd root && yunohost tools adminpw
 ```
 
+For SSL certificat
+```bash
+yunohost domain cert-install yourdomain.com
+```
+
 ## For Debian 8 (manual install) :
 
 ```bash
