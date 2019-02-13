@@ -30,6 +30,7 @@ sha512sum -c dedigo-openvz.tar.gz.sha512sum
 apt remove apache2* -y
 mv dedigo-openvz.tar.gz / && cd /
 tar -xvf dedigo-openvz.tar.gz
+echo "nameserver 1.1.1.1" > /etc/resolv.dnsmasq.conf
 ```
 
 ##### 5 - Finish
@@ -40,11 +41,7 @@ tar -xvf dedigo-openvz.tar.gz
 
 For change your password
 ```bash
-passwd root && passwd admin
-```
-For Fix DNS & after reboot your vps on panel
-```bash
-echo "nameserver 1.1.1.1" > /etc/resolv.dnsmasq.conf
+passwd root && yunohost tools adminpw
 ```
 
 ## For Debian 8 (manual install) :
