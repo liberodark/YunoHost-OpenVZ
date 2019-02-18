@@ -9,7 +9,28 @@ Copy and Past in your terminal :
 wget -Nnv https://raw.githubusercontent.com/liberodark/YunoHost-OpenVZ/master/install.sh && chmod +x install.sh; ./install.sh
 ```
 
-## Install Image (auto install) :
+## For Debian 8 (manual install) :
+
+```bash
+apt update && apt dist-upgrade -y
+```
+
+```bash
+sed -i 's|jessie|stretch|' /etc/apt/sources.list
+```
+
+```bash
+apt update && apt dist-upgrade -y
+```
+
+Next reboot and run script
+
+## Videos in French :
+
+- https://peertube.fr/videos/watch/34a51448-a49f-4802-9271-1290751309c3
+- https://youtu.be/626tgNMS7SY
+
+## Install Image (auto install !!! EXPEREMENTAL !!!) :
 
 #####  1 - Download Image
 ```bash
@@ -48,24 +69,3 @@ For SSL certificat
 ```bash
 yunohost domain cert-install yourdomain.com
 ```
-
-## For Debian 8 (manual install) :
-
-```bash
-apt update && apt dist-upgrade -y
-```
-
-```bash
-sed -i 's|jessie|stretch|' /etc/apt/sources.list
-```
-
-```bash
-apt update && apt dist-upgrade -y
-```
-
-Next reboot and run script
-
-## Videos in French :
-
-- https://peertube.fr/videos/watch/34a51448-a49f-4802-9271-1290751309c3
-- https://youtu.be/626tgNMS7SY
