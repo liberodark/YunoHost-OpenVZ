@@ -39,7 +39,7 @@ button=black,white
 function usage() {
   echo "
 Usage :
-  `basename $0` [-a] [-d <DISTRIB>] [-h]
+  $(basename "$0") [-a] [-d <DISTRIB>] [-h]
 
 Options :
   -a      Enable automatic mode. No questions are asked.
@@ -148,25 +148,25 @@ readonly white=$(printf '\033[39m')
 function success()
 {
   local msg=${1}
-  echo "[${bold}${green} OK ${normal}] ${msg}" | tee -a $YUNOHOST_LOG
+  echo "[${bold}${green} OK ${normal}] ${msg}" | tee -a "$YUNOHOST_LOG"
 }
 
 function info()
 {
   local msg=${1}
-  echo "[${bold}${blue}INFO${normal}] ${msg}" | tee -a $YUNOHOST_LOG
+  echo "[${bold}${blue}INFO${normal}] ${msg}" | tee -a "$YUNOHOST_LOG"
 }
 
 function warn()
 {
   local msg=${1}
-  echo "[${bold}${orange}WARN${normal}] ${msg}" | tee -a $YUNOHOST_LOG >&2
+  echo "[${bold}${orange}WARN${normal}] ${msg}" | tee -a "$YUNOHOST_LOG" >&2
 }
 
 function error()
 {
   local msg=${1}
-  echo "[${bold}${red}FAIL${normal}] ${msg}" | tee -a $YUNOHOST_LOG >&2
+  echo "[${bold}${red}FAIL${normal}] ${msg}" | tee -a "$YUNOHOST_LOG" >&2
 }
 
 function die() {
@@ -186,11 +186,11 @@ function apt_get_wrapper() {
     if [[ "$AUTOMODE" == "0" ]] ;
     then
       debconf-apt-progress                             \
-          --logfile $YUNOHOST_LOG                      \
+          --logfile "$YUNOHOST_LOG"                      \
           --                                           \
-          apt-get $*
+          apt-get "$*"
     else
-        apt-get $* 2>&1 | tee -a $YUNOHOST_LOG
+        apt-get "$*" 2>&1 | tee -a "$YUNOHOST_LOG"
     fi
 }
 
@@ -264,7 +264,7 @@ function upgrade_system() {
         || return 3
 
     	if [[ "$BUILD_IMAGE" != "1" ]] ; then
-		(rpi-update 2>&1 | tee -a $YUNOHOST_LOG) \
+		(rpi-update 2>&1 | tee -a "$YUNOHOST_LOG") \
 		|| return 4
 	fi
     fi
@@ -282,7 +282,7 @@ function install_script_dependencies() {
     apt_update
     apt_get_wrapper -o Dpkg::Options::="--force-confold" \
                     -y --force-yes install               \
-                    $DEPENDENCIES                        \
+                    "$DEPENDENCIES"                        \
       || return 1
 }
 
@@ -497,7 +497,7 @@ function user_pi_logged_out() {
 
 function del_user_pi() {
     if id "pi" >/dev/null 2>&1; then
-        deluser --remove-all-files pi >> $YUNOHOST_LOG 2>&1
+        deluser --remove-all-files pi >> "$YUNOHOST_LOG" 2>&1
     fi
 }
 
@@ -507,16 +507,16 @@ function del_user_pi() {
 
 function clean_image() {
     # Delete SSH keys
-    rm -f /etc/ssh/ssh_host_* >> $YUNOHOST_LOG 2>&1
-    yes | ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa >> $YUNOHOST_LOG 2>&1
-    yes | ssh-keygen -f /etc/ssh/ssh_host_dsa_key -N '' -t dsa >> $YUNOHOST_LOG 2>&1
-    yes | ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa -b 521 >> $YUNOHOST_LOG 2>&1
+    rm -f /etc/ssh/ssh_host_* >> "$YUNOHOST_LOG" 2>&1
+    yes | ssh-keygen -f /etc/ssh/ssh_host_rsa_key -N '' -t rsa >> "$YUNOHOST_LOG" 2>&1
+    yes | ssh-keygen -f /etc/ssh/ssh_host_dsa_key -N '' -t dsa >> "$YUNOHOST_LOG" 2>&1
+    yes | ssh-keygen -f /etc/ssh/ssh_host_ecdsa_key -N '' -t ecdsa -b 521 >> "$YUNOHOST_LOG" 2>&1
 
     # Deleting logs ...
-    find /var/log -type f -exec rm {} \; >> $YUNOHOST_LOG 2>&1
+    find /var/log -type f -exec rm {} \; >> "$YUNOHOST_LOG" 2>&1
 
     # Purging apt ...
-    apt-get clean >> $YUNOHOST_LOG 2>&1
+    apt-get clean >> "$YUNOHOST_LOG" 2>&1
 }
 
 
