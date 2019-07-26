@@ -104,12 +104,15 @@ function main()
     step confirm_installation          || die "Installation cancelled at your request"
     step manage_sshd_config            || die "Error caught during sshd management"
     step fix_locales                   # do not die for a failure here, it's minor
-    step setup_package_source          || die "Setting up deb package sources failed"
-    step apt_update                    || die "Error caught during 'apt-get update'"
-    step register_debconf              || die "Unable to insert new values into debconf database"
-    step workaround_avahi_installation || die "Unable to install workaround for avahi installation"
-    step install_yunohost_packages     || die "Installation of Yunohost packages failed"
-    step restart_services              || die "Error caught during services restart"
+    step build_packages_locally        || die "Failed to build packages locally"
+    step install_local_packages        || die "Failed to install local packages"
+    # The following steps rely on having a real deb repo, which we don't have for now
+    #step setup_package_source          || die "Setting up deb package sources failed"
+    #step apt_update                    || die "Error caught during 'apt-get update'"
+    #step register_debconf              || die "Unable to insert new values into debconf database"
+    #step workaround_avahi_installation || die "Unable to install workaround for avahi installation"
+    #step install_yunohost_packages     || die "Installation of Yunohost packages failed"
+    #step restart_services              || die "Error caught during services restart"
 
     if is_raspbian ; then
         step del_user_pi     || die "Unable to delete user pi"
@@ -128,6 +131,23 @@ function main()
     success "YunoHost installation completed !"
     conclusion
     exit 0
+}
+
+function build_packages_locally()
+{
+    apt install make -y
+    mkdir -p /ynh-build/
+    cp ./Makefile ./debconf /ynh-build/
+    cd /ynh-build
+    make init
+    make metronome
+    make yunohost
+}
+
+function install_local_packages()
+{
+    cd /ynh-build
+    make install
 }
 
 ###############################################################################
@@ -206,6 +226,25 @@ function apt_update() {
 
 function check_assertions()
 {
+    # Assert we're on Debian
+    # Note : we do not rely on lsb_release to avoid installing a dependency
+    # only to check this...
+    [[ -f "/etc/debian_version" ]] || die "This script can only be ran on Debian."
+
+    # Assert we're on Buster
+    # Note : we do not rely on lsb_release to avoid installing a dependency
+    # only to check this...
+    [[ "$(cat /etc/debian_version)" =~ ^10.* ]] || die "This script can only be ran on Debian Buster."
+
+    # Forbid people from installing on Ubuntu or Linux mint ...
+    if [[ -f "/etc/lsb-release" ]];
+    then
+        if cat /etc/lsb-release | grep -q -i "Ubuntu\|Mint"
+        then
+            die "Please don't try to install YunoHost on an Ubuntu or Linux Mint system ... You need a 'raw' Debian."
+        fi
+    fi
+
     # Assert we're root
     [[ "$(id -u)" == "0" ]] || die "This script must be run as root."
 
@@ -366,7 +405,7 @@ function setup_package_source() {
 
     # Debian repository
 
-    local CUSTOMDEB="deb http://forge.yunohost.org/debian/ stretch unstable"
+    local CUSTOMDEB="deb http://forge.yunohost.org/debian/ buster stable"
 
     if [[ "$DISTRIB" == "stable" ]] ; then
         echo "$CUSTOMDEB" > $CUSTOMAPT
@@ -452,15 +491,6 @@ function install_yunohost_packages() {
     # On some machines (e.g. OVH VPS), the /etc/resolv.conf is immutable
     # We need to make it mutable for the resolvconf dependency to be installed
     chattr -i /etc/resolv.conf 2>/dev/null || true
-
-    # Install those damn deps independently ...
-    # otherwise they make the install crash for random reasons ~.~
-    # c.f. https://github.com/YunoHost/issues/issues/1382
-    apt_get_wrapper \
-	    -o Dpkg::Options::="--force-confold" \
-            -y --force-yes install               \
-	    debhelper dh-autoreconf              \
-      || true
 
     # Install YunoHost
     apt_get_wrapper \
