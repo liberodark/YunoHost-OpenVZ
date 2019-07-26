@@ -366,7 +366,7 @@ function setup_package_source() {
 
     # Debian repository
 
-    local CUSTOMDEB="deb http://forge.yunohost.org/debian/ stretch stable"
+    local CUSTOMDEB="deb http://forge.yunohost.org/debian/ stretch unstable"
 
     if [[ "$DISTRIB" == "stable" ]] ; then
         echo "$CUSTOMDEB" > $CUSTOMAPT
